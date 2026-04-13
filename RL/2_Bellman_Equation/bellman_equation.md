@@ -40,6 +40,41 @@ $\bold{v}=\bold{r}+\gamma\bold{Pv}$即最简单的确定性的策略下的贝尔
 ![alt text](image-3.png)
 
 ## Bellman Equation
+1. **Bellman equation**描述的是**不同state的state value之间的关系**
+2. 推导:$v_\pi(s)=E[G_t|S_t=s]\\=E[R_{t+1}+\gamma G_{t+1}|S_t=s]\\=E[R_{t+1}|S_t=s]+\gamma E[G_{t+1}|S_t=s]\\=\Sigma_a\pi(a|s)\Sigma_rp(r|s,a)r+\gamma \Sigma_{s'}v_\pi(s')\Sigma_ap(s'|s,a)\pi(a|s)\\=\Sigma_a\pi(a|s)[\Sigma_rp(r|s,a)r+\gamma\Sigma_{s'}v_\pi(s')p(s'|s,a)]$
+3. 贝尔曼公式即:**当前state value=下一步可能的reward期望+下一步state的state value的期望**
+4. 贝尔曼公式对状态空间的所有状态都成立,通过**解方程组**就可以解出state value
+5. 贝尔曼公式依赖于**policy**($\pi(a|s)$),如果能计算出state value,就是在评价一个policy的好坏
+6. 贝尔曼公式还依赖于环境因素,即**dynamic model**,$p(r|s,a),p(s'|s,a)$代表dynamic model
+7. 即使不知道dynamic model,依然可以求出state value,即model free的算法
+
+**例**:写出grid的贝尔曼公式
+![alt text](image-4.png)
+1. $v_\pi(s_1)=0+\gamma v_\pi(s_3)$
+2. $v_\pi(s_2)=1+\gamma v_\pi(s_4)$
+3. $v_\pi(s_3)=1+\gamma v_\pi(s_4)$
+4. $v_\pi(s_4)=1+\gamma v_\pi(s_4)$
+
+解方程组得到:
+![alt text](image-5.png)
+
+假设$\gamma=0.9$,得到
+![alt text](image-6.png)
+得到$v_\pi(s)$后就可以去改进策略,得到最优策略
+
+**例二**:写出grid的贝尔曼公式
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+同样带入$\gamma=0.9$,得到
+![alt text](image-9.png)
+可以看出,$s_1$的state value下降了,因此这个策略是不如例一的策略的
+
+## 贝尔曼公式的矩阵形式
+1. 贝尔曼公式: $v_\pi(s)=r_\pi(s)+\gamma\Sigma_{s'}p_\pi(s'|s)v_\pi(s')$
+2. 假设$s_i\in S$
 
 
-## Action value
+
+<div style="height: 1000px;"></div>
