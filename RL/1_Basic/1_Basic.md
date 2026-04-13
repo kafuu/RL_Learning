@@ -73,7 +73,7 @@
 1. MDP包括：
    - Sets：State集合S，Action集合A(s)，Reward集合R（s,a）（环境）
    - Probability distribution：$p(s'|s,a)$，$p(r|s,a)$（交互）
-   - Policy：在s下采取a的概率为 $\pi(a|s)$(决策)
+   - Policy：在s下采取a的**概率**为 $\pi(a|s)$(决策)
    - MDP的性质：与历史无关，$p(s_{t+1}|s_t,a_{t+1},...,a_1,s_0)=p(s_{t+1}|s_t,a_{t+1})$，$p(r_{t+1}|s_t,a_{t+1},...,a_1,s_0)=p(r_{t+1}|s_t,a_{t+1})$
 2. 图来概括MDP
 ![alt text](image-10.png)
