@@ -1,4 +1,4 @@
-# 贝尔曼公式Bellman Equation
+# 贝尔曼公式Bellman Equation: 评判policy的方法
 ---
 1. Return 是 一个trajectory的reward之和
 2. return十分重要，环境一模一样，但是采取不同的策略：
@@ -73,8 +73,46 @@ $\bold{v}=\bold{r}+\gamma\bold{Pv}$即最简单的确定性的策略下的贝尔
 
 ## 贝尔曼公式的矩阵形式
 1. 贝尔曼公式: $v_\pi(s)=r_\pi(s)+\gamma\Sigma_{s'}p_\pi(s'|s)v_\pi(s')$
-2. 假设$s_i\in S$
+2. 假设$s_i\in S$: $v_\pi(s_i)=r_\pi(s_i)+\gamma\Sigma_{s_j}p_\pi(s_j|s_i)v_\pi(s_j)$
+3. 写作矩阵形式: $v_\pi=r_\pi+\gamma P_\pi v_\pi$
+4. 其中$v_\pi=\begin{bmatrix}
+    v_\pi(s_1)\\
+    v_\pi(s_2)\\
+    ...\\
+    v_\pi(s_n)\\
+\end{bmatrix}$
+5. 其中$r_\pi=\begin{bmatrix}
+    r_\pi(s_1)\\
+    r_\pi(s_2)\\
+    ...\\
+    r_\pi(s_n)\\
+\end{bmatrix}$
+6. 其中$[P_\pi]_{ij}=p_\pi(s_j|s_i)$,这个矩阵被称为**state transition matrix**
+n=4时:![alt text](image-10.png)
+![alt text](image-11.png)
+![alt text](image-12.png)
 
+7. 使用贝尔曼公式的矩阵形式求解state value, 叫做**policy evaluation**, 从而评价一个policy的质量
+8. 不求逆,使用迭代的方法:$v_k=r_\pi+\gamma P_\pi v_{k+1}$, 猜一个v_0,带入求v_1 ... $k\rightarrow\infin, v_k\rightarrow v_\pi$
+9. 证明:![alt text](image-13.png) 
 
+## Action value
+1. action value指的是,**从一个state出发,做出了一个action后的average return**
+2. action value的定义:$q_\pi(s,a)=E[G_t|S_t=s,A_t=a]$
+3. action value是依赖于s,a的函数
+4. action依赖于不同的策略$\pi$
+5. **action value与state value的联系**:$v_\pi(s)=\Sigma_a\pi(a|s)q_\pi(s,a)$
+6. $q_\pi(s,a)=\Sigma_r p(r|s,a)+\Sigma_{s'}p(s'|s,a)v_\pi(s')$
+7. 5说明知道action value,就能知道state value.6说明知道state value,就能知道action value
+**例**:
+![alt text](image-14.png)
+action value: $q_\pi(s_1,a_2)=-1+\gamma v_\pi(s_2)$
 
+## 小结
+1. **State Value**: 状态discounted return的期望
+2. **Action Value**: 采取action后discounted return的期望
+3. **Bellman equation**: 描述状态之间的state value的关系
+4. 贝尔曼公式的**矩阵形式**,用于求解state value
+5. **state value 与 action value的转化**
+ 
 <div style="height: 1000px;"></div>
