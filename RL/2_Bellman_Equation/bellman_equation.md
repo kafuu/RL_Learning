@@ -13,7 +13,7 @@
 例如，$v_1=r_1+\gamma v_2$
 这被成为**Bootstrapping**
 9. 这种循环关系，看似不可能求解，但是实际上：
-$\bold{v}=\bold{r}+\gamma\bold{Pv}$
+$$\bold{v}=\bold{r}+\gamma\bold{Pv}$$
 在此例中$P=\begin{bmatrix}
     0,1,0,0\\
     0,0,1,0\\
@@ -41,7 +41,7 @@ $\bold{v}=\bold{r}+\gamma\bold{Pv}$即最简单的确定性的策略下的贝尔
 
 ## Bellman Equation
 1. **Bellman equation**描述的是**不同state的state value之间的关系**
-2. 推导:$v_\pi(s)=E[G_t|S_t=s]\\=E[R_{t+1}+\gamma G_{t+1}|S_t=s]\\=E[R_{t+1}|S_t=s]+\gamma E[G_{t+1}|S_t=s]\\=\Sigma_a\pi(a|s)\Sigma_rp(r|s,a)r+\gamma \Sigma_{s'}v_\pi(s')\Sigma_ap(s'|s,a)\pi(a|s)\\=\Sigma_a\pi(a|s)[\Sigma_rp(r|s,a)r+\gamma\Sigma_{s'}v_\pi(s')p(s'|s,a)]$
+2. 推导:$$v_\pi(s)=E[G_t|S_t=s]\\=E[R_{t+1}+\gamma G_{t+1}|S_t=s]\\=E[R_{t+1}|S_t=s]+\gamma E[G_{t+1}|S_t=s]\\=\Sigma_a\pi(a|s)\Sigma_rp(r|s,a)r+\gamma \Sigma_{s'}v_\pi(s')\Sigma_ap(s'|s,a)\pi(a|s)\\=\Sigma_a\pi(a|s)[\Sigma_rp(r|s,a)r+\gamma\Sigma_{s'}v_\pi(s')p(s'|s,a)]$$
 3. 贝尔曼公式即:**当前state value=下一步可能的reward期望+下一步state的state value的期望**
 4. 贝尔曼公式对状态空间的所有状态都成立,通过**解方程组**就可以解出state value
 5. 贝尔曼公式依赖于**policy**($\pi(a|s)$),如果能计算出state value,就是在评价一个policy的好坏
@@ -72,21 +72,22 @@ $\bold{v}=\bold{r}+\gamma\bold{Pv}$即最简单的确定性的策略下的贝尔
 可以看出,$s_1$的state value下降了,因此这个策略是不如例一的策略的
 
 ## 贝尔曼公式的矩阵形式
-1. 贝尔曼公式: $v_\pi(s)=r_\pi(s)+\gamma\Sigma_{s'}p_\pi(s'|s)v_\pi(s')$
-2. 假设$s_i\in S$: $v_\pi(s_i)=r_\pi(s_i)+\gamma\Sigma_{s_j}p_\pi(s_j|s_i)v_\pi(s_j)$
-3. 写作矩阵形式: $v_\pi=r_\pi+\gamma P_\pi v_\pi$
-4. 其中$v_\pi=\begin{bmatrix}
+1. **贝尔曼公式**: $$v_\pi(s)=r_\pi(s)+\gamma\Sigma_{s'}p_\pi(s'|s)v_\pi(s')$$
+2. 假设$$s_i\in S\\ 
+v_\pi(s_i)=r_\pi(s_i)+\gamma\Sigma_{s_j}p_\pi(s_j|s_i)v_\pi(s_j)$$
+3. 写作**矩阵形式**: $$v_\pi=r_\pi+\gamma P_\pi v_\pi$$
+4. 其中$$v_\pi=\begin{bmatrix}
     v_\pi(s_1)\\
     v_\pi(s_2)\\
     ...\\
     v_\pi(s_n)\\
-\end{bmatrix}$
-5. 其中$r_\pi=\begin{bmatrix}
+\end{bmatrix}$$
+5. 其中$$r_\pi=\begin{bmatrix}
     r_\pi(s_1)\\
     r_\pi(s_2)\\
     ...\\
     r_\pi(s_n)\\
-\end{bmatrix}$
+\end{bmatrix}$$
 6. 其中$[P_\pi]_{ij}=p_\pi(s_j|s_i)$,这个矩阵被称为**state transition matrix**
 n=4时:![alt text](image-10.png)
 ![alt text](image-11.png)
@@ -98,12 +99,12 @@ n=4时:![alt text](image-10.png)
 
 ## Action value
 1. action value指的是,**从一个state出发,做出了一个action后的average return**
-2. action value的定义:$q_\pi(s,a)=E[G_t|S_t=s,A_t=a]$
+2. action value的定义:$$q_\pi(s,a)=E[G_t|S_t=s,A_t=a]$$
 3. action value是依赖于s,a的函数
 4. action依赖于不同的策略$\pi$
-5. **action value与state value的联系**:$v_\pi(s)=\Sigma_a\pi(a|s)q_\pi(s,a)$
-6. $q_\pi(s,a)=\Sigma_r p(r|s,a)+\Sigma_{s'}p(s'|s,a)v_\pi(s')$
-7. 5说明知道action value,就能知道state value.6说明知道state value,就能知道action value
+5. **action value与state value的联系**:$$v_\pi(s)=\Sigma_a\pi(a|s)q_\pi(s,a)\\ 
+q_\pi(s,a)=\Sigma_r p(r|s,a)+\Sigma_{s'}p(s'|s,a)v_\pi(s')$$
+1. 公式1说明知道action value,就能知道state value.公式2说明知道state value,就能知道action value
 **例**:
 ![alt text](image-14.png)
 action value: $q_\pi(s_1,a_2)=-1+\gamma v_\pi(s_2)$
